@@ -7,3 +7,4 @@ build
 .eslintrc.js
 
 next.config.js
+webpack.config.js
