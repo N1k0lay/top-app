@@ -1,6 +1,6 @@
 import type {NextPage} from 'next';
 import {Htag, Button, P, Tag, Rating} from "../components";
-import React, {FunctionComponent, useState} from "react";
+import React, {useState} from "react";
 import {withLayout } from '../layout/Layout';
 
 
