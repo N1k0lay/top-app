@@ -1,4 +1,13 @@
 {
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "browser": true,
+    "es6": true
+  },
+  "globals": {
+    "process": true
+  },
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
