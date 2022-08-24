@@ -27,6 +27,8 @@
 	line-height: 16px;
 }
 
+
+
 .secondBlock {
 	margin-top: 15px;
 	margin-left: 12px;
@@ -50,4 +52,12 @@
 
 .thirdLevelActive, .thirdLevel:hover {
 	color: var(--primary)
+}
+
+.thirdLevelBlock {
+	display: none;
+}
+
+.thirdLevelBlockOpen {
+	display: block;
 }
