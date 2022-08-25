@@ -12,6 +12,7 @@ export const Tag = ({size = 'm', children, color = 'ghost', className, href, ...
             [styles.primary]: color == "primary",
             [styles.green]: color == "green",
             [styles.red]: color == "red",
+            [styles.gray]: color == "gray",
         })} {...props}>
             {href
                 ? <a href={href}>{children}</a>
