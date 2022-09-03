@@ -1,5 +1,5 @@
 import type {GetStaticProps, NextPage} from 'next';
-import {Htag, Button, P, Tag, Rating} from "../components";
+import {Htag, Button, P, Tag, Rating, Input, Textarea} from "../components";
 import React, {useState} from "react";
 import {withLayout} from '../layout/Layout';
 import axios from 'axios';
@@ -26,10 +26,8 @@ function Home({menu}: HomeProps): JSX.Element {
             <Tag size={"s"} color={"ghost"} children="m g"/>
             <Tag size={"s"} color={"primary"} children="m p"/>
             <Rating rating={rating} isEditable setRating={setRating}/>
-            <ul>
-                {menu.map(m => (<li key={m._id.secondCategory}>{m._id.secondCategory}</li>))}
-            </ul>
-
+            <Input placeholder={'test'} />
+            <Textarea placeholder={'test'} />
         </>
     );
 }

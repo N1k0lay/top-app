@@ -1,16 +1,16 @@
 import React, {useReducer} from 'react';
 import {TopPageComponentProps} from "./TopPageComponent.props";
-import {Advantages, HhData, Htag, Sort, Tag} from "../../components";
+import {Advantages, HhData, Htag, Product, Sort, Tag} from "../../components";
 import styles from "../TopPageComponent/TopPageComponent.module.css";
 import {TopLevelCategory} from '../../interfaces/page.interfase';
-import { SortEnum } from '../../components/Sort/Sort.props';
-import { SortReducer } from './sort.reducer';
+import {SortEnum} from '../../components/Sort/Sort.props';
+import {SortReducer} from './sort.reducer';
 
 export const TopPageComponent = ({page, products, firstCategory}: TopPageComponentProps): JSX.Element => {
 
     const [{products: sortedProducts, sort}, dispathSort] = useReducer(SortReducer, {products, sort: SortEnum.Rating});
 
-    const setSort = (sort:SortEnum) => {
+    const setSort = (sort: SortEnum) => {
         dispathSort({type: sort});
     };
     return (
@@ -18,10 +18,10 @@ export const TopPageComponent = ({page, products, firstCategory}: TopPageCompone
             <div className={styles.title}>
                 <Htag tag={"h1"}>{page.title}</Htag>
                 {products && <Tag color={"gray"} size={"m"}>{products.length}</Tag>}
-                <Sort sort={sort}  setSort={setSort}/>
+                <Sort sort={sort} setSort={setSort}/>
             </div>
             <div>
-                {sortedProducts && sortedProducts.map(p => (<div key={p._id}>{p.title}</div>))}
+                {sortedProducts && sortedProducts.map(p => (<Product key={p._id} product={p}></Product>))}
             </div>
             <div className={styles.hhTitle}>
                 <Htag tag={"h2"}>Вакансии - {page.category}</Htag>
