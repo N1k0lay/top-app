@@ -7,6 +7,7 @@ import { withLayout } from '../../layout/Layout';
 import {GetStaticPaths, GetStaticPropsContext} from "next";
 import {firstLevelMenu} from "../../helpers/helpers";
 import {ParsedUrlQuery} from "querystring";
+import {API} from "../../helpers/api";
 
 
 function Type({firstCategory}:TypeProps): JSX.Element {
@@ -40,8 +41,7 @@ export const getStaticProps: GetStaticProps<TypeProps> = async ({params}: GetSta
             notFound: true
         };
     }
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    const {data: menu} = await axios.post<MenuItem[]>(`${process.env.NEXT_PUBLIC_DOMAIN}/api/top-page/find`, {firstCategory: firstCategoryItem.id});
+    const {data: menu} = await axios.post<MenuItem[]>(API.topPage.find, {firstCategory: firstCategoryItem.id});
     return {
         props: {
             menu,
