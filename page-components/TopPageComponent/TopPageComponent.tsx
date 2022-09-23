@@ -5,10 +5,13 @@ import styles from "../TopPageComponent/TopPageComponent.module.css";
 import {TopLevelCategory} from '../../interfaces/page.interfase';
 import {SortEnum} from '../../components/Sort/Sort.props';
 import {SortReducer} from './sort.reducer';
+import {useScrollY} from "../../hooks/useScrollY";
 
 export const TopPageComponent = ({page, products, firstCategory}: TopPageComponentProps): JSX.Element => {
 
     const [{products: sortedProducts, sort}, dispathSort] = useReducer(SortReducer, {products, sort: SortEnum.Rating});
+
+    const y = useScrollY();
 
     useEffect(() => {
         dispathSort({type: "reset", initialState: products});
@@ -25,7 +28,7 @@ export const TopPageComponent = ({page, products, firstCategory}: TopPageCompone
                 <Sort sort={sort} setSort={setSort}/>
             </div>
             <div>
-                {sortedProducts && sortedProducts.map(p => (<Product key={p._id} product={p}></Product>))}
+                {sortedProducts && sortedProducts.map(p => (<Product layout key={p._id} product={p}></Product>))}
             </div>
             <div className={styles.hhTitle}>
                 <Htag tag={"h2"}>Вакансии - {page.category}</Htag>
