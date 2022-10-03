@@ -6,6 +6,10 @@
 	margin-right: 5px;
 }
 
+.star {
+	display: inline-block;
+}
+
 .editable {
 	cursor: pointer;
 }

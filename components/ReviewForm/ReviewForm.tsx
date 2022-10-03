@@ -13,9 +13,9 @@ import axios from "axios";
 import {API} from "../../helpers/api";
 import {string} from "prop-types";
 
-export const ReviewForm = ({productId, className, ...props}: ReviewFormProps): JSX.Element => {
+export const ReviewForm = ({productId, isOpened, className, ...props}: ReviewFormProps): JSX.Element => {
 
-    const {register, control, handleSubmit, formState: {errors}, reset} = useForm<IReviewForm>();
+    const {register, control, handleSubmit, formState: {errors}, reset, clearErrors} = useForm<IReviewForm>();
     const [isSuccess, setIsSuccess] = useState<boolean>(false);
     const [error, setError] = useState<string>();
 
@@ -46,12 +46,17 @@ export const ReviewForm = ({productId, className, ...props}: ReviewFormProps): J
                     {...register('name', {required: {value: true, message: "Заполните имя"}})}
                     placeholder={'Имя'}
                     error={errors.name}
+                    tabIndex={isOpened ? 0 : -1}
+                    aria-invalid={!!errors.name}
                 />
                 <Input
                     {...register('title', {required: {value: true, message: 'Заполните заголовок'}})}
                     placeholder={'Заголовок'}
                     className={styles.title}
                     error={errors.title}
+                    tabIndex={isOpened ? 0 : -1}
+                    aria-invalid={!!errors.title}
+
                 />
                 <div className={styles.rating}>
                     <span>Оценка:</span>
@@ -74,22 +79,36 @@ export const ReviewForm = ({productId, className, ...props}: ReviewFormProps): J
                     placeholder={'Текст отзыва'}
                     className={styles.description}
                     error={errors.description}
+                    tabIndex={isOpened ? 0 : -1}
+                    aria-label={'Текст отзыва'}
+                    aria-invalid={!!errors.description}
                 />
                 <div className={styles.submit}>
-                    <Button appearance={'primary'}>Отправить</Button>
+                    <Button appearance={'primary'} tabIndex={isOpened ? 0 : -1}
+                            onClick={() => clearErrors()}>Отправить</Button>
                     <span
                         className={styles.info}>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
                 </div>
             </div>
-            {isSuccess && <div className={cn(styles.success, styles.panel)}>
+            {isSuccess && <div className={cn(styles.success, styles.panel)} role={"alert"}>
                 <div className={styles.successTitle}>Ваш отзыв отправлен</div>
                 <div className={styles.successDescription}>Ваш отзыв будет опубликован после проверки</div>
-                <CloseIcon className={styles.close} onClick={() => setIsSuccess(false)}/>
+                <button
+                    className={styles.close}
+                    onClick={() => setIsSuccess(false)}
+                    aria-label={`закрыть оповещение`}>
+                    <CloseIcon/>
+                </button>
             </div>}
-            {error && <div className={cn(styles.error, styles.panel)}>
+            {error && <div className={cn(styles.error, styles.panel)} role={"alert"}>
                 <div className={styles.errorTitle}>{error}</div>
                 <div className={styles.errorDescription}>Ваш отзыв будет опубликован после проверки</div>
-                <CloseIcon className={styles.close} onClick={() => setError(undefined)}/>
+                <button
+                    className={styles.close}
+                    onClick={() => setError(undefined)}
+                    aria-label={`закрыть оповещение`}>
+                    <CloseIcon/>
+                </button>
             </div>}
 
         </form>

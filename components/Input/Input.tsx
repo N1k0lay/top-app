@@ -9,7 +9,7 @@ export const Input = forwardRef(({error, className, ...props}: InputProps, ref:F
             <input {...props} className={cn(styles.input, {
                 [styles.error]: error
             })} ref={ref}/>
-            {error && <span className={styles.errorMessage}>{error.message}</span>}
+            {error && <span role='alert' className={styles.errorMessage}>{error.message}</span>}
         </div>
     );
 });
